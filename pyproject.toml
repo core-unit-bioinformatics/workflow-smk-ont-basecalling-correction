@@ -3,8 +3,8 @@ pid = "https://github.com/core-unit-bioinformatics/template-metadata-files"
 version = "1.7.0"
 
 [cubi.workflow]
-pid = "undefined"
-name = "undefined"
+pid = "https://github.com/core-unit-bioinformatics/workflow-smk-ont-basecalling-correction"
+name = "ont-basecalling-correction"
 version = "prototype"
 
 [tool.black]

@@ -1,6 +1,6 @@
 # Template for developing Snakemake workflows
 
-Brief description of workflow
+Basecalling and correctopn of ONT sequencing data.
 
 ## Required software environment
 
@@ -18,11 +18,16 @@ For a detailed setup guide, please refer to [the workflow documentation](docs/RE
 
 ## Required input data
 
-Add info here - be concise, and provide more details in [the workflow documentation](docs/README.md).
+- ONT sequencing data for the samples that should be basecalled and corrected.
+- Comma-separated samplesheet containing sample ID and path to the sequencing data.
+- (Dorado basecalling and correction models fitting your type of data.)
+- More details in [the workflow documentation](docs/README.md).
 
 ## Produced output data
 
-Add info here - be concise, and provide more details in [the workflow documentation](docs/README.md).
+- Basecalled sequencing data.
+- Corrected sequencing data.
+- More details in [the workflow documentation](docs/README.md).
 
 # Citation
 

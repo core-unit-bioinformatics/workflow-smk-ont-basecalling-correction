@@ -1,6 +1,19 @@
 # Documentation for Snakemake workflow NAME HERE
 
-Describe the purpose of the workflow (the big picture)
+This workflow (re)-basecalls and corrects Oxford Nanopore Technologies sequencing data.
+
+## Required input data
+
+- Oxford Nanopore Technologies sequencing data for the samples that should be (re-)basecalled and corrected. Either fast5 oder pod5 files are possible. fast5 files will be reformatted to pod5 files before the basecalling.
+- Comma-separated samplesheet containing the sample ID and the path to the sequencing data in the format "[SAMPLE_ID],[PATH/TO/DATA/FILE.POD5]", one sample per line.
+- (Dorado basecalling and correction models fitting your type of data. These are downloadable using dorado. 
+    - Example: "/path/to/dorado download --model dna_r10.4.1_e8.2_400bps_sup@v4.1.0"
+
+## Produced output data
+
+- Basecalled sequencing data, before the correction step. See path: /???/???/results_basecalling/[SAMPLE_ID]_basecalled.fastq
+- Basecalled AND corrected sequencing data. See path: /???/???/results_correction/[SAMPLE_ID]_corrected.fastq
+- A log file containing the user-provided parameters.
 
 ## User documentation
 
