@@ -1,0 +1,28 @@
+# Global configuration for the workflow "workflow-smk-ont-basecalling-correction"
+
+# Path to the samplesheet (must be TSV with columns: sample_name, file_path)
+samplesheet: "/home/sebastian/Data/Git/project-4mrgn-assembly/samples/sample-sheet_4mrgn_test-1.tsv"
+
+# Where results should be stored | Default: "../../results-smk-ont-basecalling-correction" (will be created in the same directory as main workflow dir)
+###results_dir: "../../results-smk-ont-basecalling-correction"
+
+# Paths to tools (needs to be modified to fit the users installation paths)
+dorado_bin: "/home/sebastian/Tools/dorado-0.9.6-linux-x64/bin/dorado"
+pod5_convert_bin: "pod5"  # assume pod5 is in PATH or installed within the used conda environment
+
+# Dorado models (must be downloaded manually for offline use; needs to be modified to fit the users paths) | Current SUP model: "/path/to/dna_r10.4.1_e8.2_400bps_sup@v4.1.0"
+dorado_sup_model: "/home/sebastian/Tools/dorado-0.9.6-linux-x64/models/dna_r10.4.1_e8.2_400bps_sup@v4.1.0" #"sup"
+dorado_correction_model: "/home/sebastian/Tools/dorado-0.9.6-linux-x64/models/herro-v1"
+
+# Dorado kit (needs to be modified to fit the users parameters)
+dorado_kit: "SQK-NBD114-24"
+
+# Resources
+cpu_high: 16                # for basecalling and correction
+cpu_med: 8                  # for converting
+cpu_low: 4
+mem_high: 4096    # in mb      # for basecalling and correction
+mem_med: 3072     # in mb      # for converting
+mem_low: 2048     # in mb
+
+ 

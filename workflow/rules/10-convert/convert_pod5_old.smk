@@ -8,8 +8,6 @@ sample_dict = sample_paths.set_index('sample_name')['file_path'].to_dict()
 SAMPLES = list(sample_dict.keys())
 input_dirs = sample_dict.values()
 
-# print(input_dirs)
-
 rule all:
     input:
         expand("/home/sebastian/Data/4MRGN/{sample}_pod5", sample=SAMPLES)

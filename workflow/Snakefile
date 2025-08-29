@@ -9,6 +9,8 @@ if not RUN_IN_TEST_MODE:
 else:
     logerr("DEBUG: test run detected - workflow module include skipped")
 
+include: "rules/00_modules.smk"
+include: "rules/99_aggregate.smk"
 
 rule run_all:
     """ The WORKFLOW_OUTPUT
