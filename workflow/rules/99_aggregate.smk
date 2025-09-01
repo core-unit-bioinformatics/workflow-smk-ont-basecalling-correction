@@ -6,12 +6,13 @@ The WORKFLOW_OUTPUT list is referenced
 in the main Snakefile
 """
 
-WORKFLOW_OUTPUT = [
-	expand(
-            DIR_RES.joinpath("corrected.fasta/{sample}_corrected.fasta"), ### TO DO: in modulen anpassen und hier als variable übernehmen!
-            sample=SAMPLES
-    )
-]
+WORKFLOW_OUTPUT = []
+
+# List outputs from modules
+#WORKFLOW_OUTPUT.extend(CONVERT_OUTPUT)     # ask for output ot the conversion module
+WORKFLOW_OUTPUT.extend(BASECALL_OUTPUT)     # ask for output ot the basecalling module
+#WORKFLOW_OUTPUT.extend(CORRECT_OUTPUT)     # ask for output ot the correction module
+
 
 # Example for extending the output
 # with output from another module
