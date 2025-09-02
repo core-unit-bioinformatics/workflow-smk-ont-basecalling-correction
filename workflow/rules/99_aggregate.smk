@@ -10,8 +10,8 @@ WORKFLOW_OUTPUT = []
 
 # List outputs from modules
 #WORKFLOW_OUTPUT.extend(CONVERT_OUTPUT)     # ask for output ot the conversion module
-WORKFLOW_OUTPUT.extend(BASECALL_OUTPUT)     # ask for output ot the basecalling module
-#WORKFLOW_OUTPUT.extend(CORRECT_OUTPUT)     # ask for output ot the correction module
+#WORKFLOW_OUTPUT.extend(BASECALL_OUTPUT)     # ask for output ot the basecalling module
+WORKFLOW_OUTPUT.extend(CORRECT_OUTPUT)     # ask for output ot the correction module
 
 
 # Example for extending the output

@@ -4,16 +4,23 @@ This workflow (re)-basecalls and corrects Oxford Nanopore Technologies sequencin
 
 ## Required input data
 
-- Oxford Nanopore Technologies sequencing data for the samples that should be (re-)basecalled and corrected. Either fast5 oder pod5 files are possible. fast5 files will be reformatted to pod5 files before the basecalling.
-- Comma-separated samplesheet containing the sample ID and the path to the sequencing data in the format "[SAMPLE_ID],[PATH/TO/DATA/FILE.POD5]", one sample per line.
-- (Dorado basecalling and correction models fitting your type of data. These are downloadable using dorado. 
-    - Example: "/path/to/dorado download --model dna_r10.4.1_e8.2_400bps_sup@v4.1.0"
-
+- Oxford Nanopore Technologies sequencing data for the samples that should be (re-)basecalled and corrected. Either fast5 oder pod5 files are possible. fast5 files will automatically be converted to pod5 files before the basecalling.
+- Please insert the following information into the config file at the mentioned position (workflow-smk-ont-basecalling-correction/config/config.yaml). 
+    - Tab-separated samplesheet containing the sample ID and the path to the sequencing data in the format "[SAMPLE_ID]   [PATH/TO/DATA/FILE.ENDING]", one sample per line. The path accepts either fast5 files, pod5 files, or directories containing one of these formats.
+    - A Dorado installation (see documentation: https://github.com/nanoporetech/dorado), as well as basecalling and correction models fitting your type of data. These are downloadable using dorado. Please look up, which models you need for your data (e.g. on https://github.com/nanoporetech/dorado).
+        - Example - Basecallimg model download: /path/to/dorado download --model dna_r10.4.1_e8.2_400bps_sup@v4.1.0
+        - Example - Correction model download: /path/to/dorado download --model herro-v1
+    - The kit used for sequencing (e.g. "SQK-NBD114-24")
+    - A pod5 installation (Install the corresponding conda environment using the file workflow-smk-ont-basecalling-correction/workflow/envs/pod5.yaml).
+    - Available ressources for the different pipeline steps. [WIP]
+ 
 ## Produced output data
 
-- Basecalled sequencing data, before the correction step. See path: /???/???/results_basecalling/[SAMPLE_ID]_basecalled.fastq
-- Basecalled AND corrected sequencing data. See path: /???/???/results_correction/[SAMPLE_ID]_corrected.fastq
-- A log file containing the user-provided parameters.
+- Converted pod5 files, if fast5 input was provided by the user. See path:  /wd/results/converted_pod5/[SAMPLE_ID].pod5
+- Basecalled sequencing data, before the correction step. See path:         /wd/results/basecalled_pod5/[SAMPLE_ID]_basecalled.fastq
+- Basecalled AND corrected sequencing data. See path:                       /wd/results/corrected_fasta/[SAMPLE_ID]_corrected.fasta
+- A log file, containing (user-provided) parameters. See path:              /wd/results/run_config.yaml
+- A log file, listing which pipeline steps succeded. See path:              /wd/results/log-file_ont-basecalling-correction.log
 
 ## User documentation
 

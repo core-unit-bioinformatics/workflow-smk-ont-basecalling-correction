@@ -17,8 +17,11 @@ rule basecall:
 #    threads:
 #        cpu = CPU_HIGH              # parameter taken from and changable in "config/config.yaml"   # TO DO: cpu should belong here
     run:
-        shell(f"{DORADO_BIN} basecaller --device cuda:0 {DORADO_MODEL} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")       # run program
-        
+        try:
+            shell(f"{DORADO_BIN} basecaller --device cuda:0 {DORADO_MODEL} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")
+            log_step(wildcards.sample, "BASECALL", "SUCCESS")
+        except Exception as e:
+            log_step(wildcards.sample, "BASECALL", "FAILURE", str(e))
 
 # output definition
 BASECALL_OUTPUT = expand(
