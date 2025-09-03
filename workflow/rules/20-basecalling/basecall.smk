@@ -11,9 +11,10 @@ rule basecall:
     output:
         fastq = DIR_RES.joinpath("basecalled_pod5/{sample}_basecalled.fastq")       # 
     resources:
-        mem_mb = MEM_HIGH,            # arameter taken from and changable in "config/config.yaml"
-        cpu = CPU_HIGH              # parameter taken from and changable in "config/config.yaml"
-#        time = ???
+        mem_mb = MEM_HIGH,  # '256G'           # parameter taken from and changable in "config/config.yaml"
+        cpu = CPU_HIGH      # '64'              # parameter taken from and changable in "config/config.yaml"
+#       gpu = ???           # '8'
+#       walltime = ???      # '08:00:00'
 #    threads:
 #        cpu = CPU_HIGH              # parameter taken from and changable in "config/config.yaml"   # TO DO: cpu should belong here
     run:

@@ -6,9 +6,10 @@ rule correct_reads:
     output:
         fasta = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta")
     resources:
-        mem_mb = MEM_HIGH,            # arameter taken from and changable in "config/config.yaml"
-        cpu = CPU_HIGH              # parameter taken from and changable in "config/config.yaml"
-#        time = ???
+        mem_mb = MEM_HIGH,  # '256G'           # parameter taken from and changable in "config/config.yaml"
+        cpu = CPU_HIGH      # '64'             # parameter taken from and changable in "config/config.yaml"
+#       gpu = ???           # '2'
+#       walltime = ???      # '08:00:00'
 #    threads:
 #        cpu = CPU_HIGH              # parameter taken from and changable in "config/config.yaml"   # TO DO: cpu should belong here
     run:

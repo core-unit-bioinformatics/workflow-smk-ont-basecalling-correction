@@ -5,11 +5,12 @@ rule convert_to_pod5:
     output:
         pod5 = DIR_RES.joinpath("converted_pod5/{sample}.pod5")
     conda:
-        "../../envs/pod5.yaml"
+        DIR_ENVS.joinpath("pod5.yaml")
     resources:
         mem_mb = MEM_MED,
         cpu = CPU_MED
-#       time = ???
+#       gpu = ???
+#       walltime = ???
 #    threads:
 #        cpu = CPU_MED              # parameter taken from and changable in "config/config.yaml"   # TO DO: cpu should belong here
     run:
