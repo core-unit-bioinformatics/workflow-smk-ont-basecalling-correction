@@ -11,12 +11,10 @@ rule basecall:
     output:
         fastq = DIR_RES.joinpath("basecalled_pod5/{sample}_basecalled.fastq")       # 
     resources:
-        mem_mb = MEM_HIGH,  # '256G'           # parameter taken from and changable in "config/config.yaml"
-        cpu = CPU_HIGH      # '64'              # parameter taken from and changable in "config/config.yaml"
-#       gpu = ???           # '8'
-#       walltime = ???      # '08:00:00'
-#    threads:
-#        cpu = CPU_HIGH              # parameter taken from and changable in "config/config.yaml"   # TO DO: cpu should belong here
+        mem_mb = 4000 ### MEM_BASECALL,      # parameter taken from and changable in "config/config.yaml"
+        ### gpu = GPU_BASECALL          # ^^
+    threads:
+        16 ### CPU_BASECALL                # ^^
     run:
         try:
             shell(f"{DORADO_BIN} basecaller --device cuda:0 {DORADO_MODEL} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")

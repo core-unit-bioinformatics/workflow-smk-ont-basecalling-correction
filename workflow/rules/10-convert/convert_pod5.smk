@@ -7,12 +7,9 @@ rule convert_to_pod5:
     conda:
         DIR_ENVS.joinpath("pod5.yaml")
     resources:
-        mem_mb = MEM_MED,
-        cpu = CPU_MED
-#       gpu = ???
-#       walltime = ???
-#    threads:
-#        cpu = CPU_MED              # parameter taken from and changable in "config/config.yaml"   # TO DO: cpu should belong here
+        mem_mb = 4000 ### MEM_CONVERT        # parameter taken from and changable in "config/config.yaml"
+    threads:
+        4 ### CPU_CONVERT                 # ^^
     run:
         try:
             shell(f"pod5 convert fast5 {input.fast5} --output {output.pod5}")

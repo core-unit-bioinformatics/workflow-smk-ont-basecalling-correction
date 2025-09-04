@@ -6,14 +6,11 @@ rule correct_reads:
     output:
         fasta = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta")
     resources:
-        mem_mb = MEM_HIGH,  # '256G'           # parameter taken from and changable in "config/config.yaml"
-        cpu = CPU_HIGH      # '64'             # parameter taken from and changable in "config/config.yaml"
-#       gpu = ???           # '2'
-#       walltime = ???      # '08:00:00'
-#    threads:
-#        cpu = CPU_HIGH              # parameter taken from and changable in "config/config.yaml"   # TO DO: cpu should belong here
+        mem_mb = 4000 ### MEM_CORRECT,       # parameter taken from and changable in "config/config.yaml"
+        ### gpu = GPU_CORRECT           # ^^
+    threads:
+        16 ### CPU_CORRECT                 # ^^
     run:
-        #shell(f"mkdir -p $(dirname {output.fasta})")        # create output directory   ### TO Do: is this necessary???
         try:
             shell(f"{DORADO_BIN} correct --device cuda:0 -m {input.model} {input.fastq} > {output.fasta}")
             log_step(wildcards.sample, "CORRECT", "SUCCESS")
