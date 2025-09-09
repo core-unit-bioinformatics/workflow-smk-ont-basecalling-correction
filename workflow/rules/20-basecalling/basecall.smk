@@ -10,6 +10,8 @@ rule basecall:
         )
     output:
         fastq = DIR_RES.joinpath("basecalled_pod5/{sample}_basecalled.fastq")       # 
+    benchmark:
+        DIR_RES.joinpath("benchmarks/basecall_{sample}_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
         mem_mb = 4000 ### MEM_BASECALL,      # parameter taken from and changable in "config/config.yaml"
         ### gpu = GPU_BASECALL          # ^^

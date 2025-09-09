@@ -17,11 +17,11 @@ pod5_convert_bin: "pod5"    # TO DO: add code for an online/offline switch.
 # Resources                 # TO DO: allocate these within the modules?
 cpu_correct: 64
 cpu_basecall: 64
-cpu_convert: 16
+cpu_convert: 4
 
 mem_correct: 256000    # 256gb 
 mem_basecall: 256000   # 256gb
-mem_convert: 4000       # 4gb
+mem_convert: 8000      # 8gb
 
 gpu_correct: 8
 gpu_basecall: 8

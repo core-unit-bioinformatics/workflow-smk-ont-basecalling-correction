@@ -5,6 +5,8 @@ rule correct_reads:
         model = DORADO_CORRECTION_MODEL     # parameter taken from and changable in "config/config.yaml"
     output:
         fasta = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta")
+    benchmark:
+        DIR_RES.joinpath("benchmarks/correct_{sample}_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
         mem_mb = 4000 ### MEM_CORRECT,       # parameter taken from and changable in "config/config.yaml"
         ### gpu = GPU_CORRECT           # ^^

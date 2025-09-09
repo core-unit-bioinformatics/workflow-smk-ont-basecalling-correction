@@ -1,8 +1,7 @@
 import datetime
-#from pathlib import Path
 
 # create a log file for the pipeline run
-LOG_FILE = DIR_RES.joinpath("log-file_ont-basecalling-correction.log")
+LOG_FILE = DIR_RES.joinpath("ont-basecalling-correction.log")
 
 # write header if the file does not exist yet
 if not LOG_FILE.exists():
