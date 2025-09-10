@@ -19,7 +19,7 @@ rule basecall:
         16 ### CPU_BASECALL                # ^^
     run:
         try:
-            shell(f"{DORADO_BIN} basecaller --device cuda:0 {DORADO_MODEL} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")
+            shell(f"{DORADO_BIN} basecaller --device cuda {DORADO_MODEL} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")
             log_step(wildcards.sample, "BASECALL", "SUCCESS")
         except Exception as e:
             log_step(wildcards.sample, "BASECALL", "FAILURE", str(e))

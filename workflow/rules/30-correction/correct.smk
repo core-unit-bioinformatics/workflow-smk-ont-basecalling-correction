@@ -14,7 +14,7 @@ rule correct_reads:
         16 ### CPU_CORRECT                 # ^^
     run:
         try:
-            shell(f"{DORADO_BIN} correct --device cuda:0 -m {input.model} {input.fastq} > {output.fasta}")
+            shell(f"{DORADO_BIN} correct --device cuda -m {input.model} {input.fastq} > {output.fasta}")
             log_step(wildcards.sample, "CORRECT", "SUCCESS")
         except Exception as e:
             log_step(wildcards.sample, "CORRECT", "FAILURE", str(e))
