@@ -3,7 +3,7 @@ SAMPLESHEET = config["samplesheet"]
 
 # Tools
 DORADO_BIN = config["dorado_bin"]
-POD5_CONVERT_BIN = config["pod5_convert_bin"]
+POD5_BIN = config["pod5_convert_bin"]
 
 # Models and kit
 DORADO_MODEL = config["dorado_sup_model"]

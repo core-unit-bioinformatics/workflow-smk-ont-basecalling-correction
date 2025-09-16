@@ -10,6 +10,8 @@ rule basecall:
         )
     output:
         fastq = DIR_RES.joinpath("basecalled_pod5/{sample}_basecalled.fastq")       # 
+    conda:
+        DIR_ENVS.joinpath("dorado.yaml")      # activating conda environment needed for this module
     benchmark:
         DIR_RES.joinpath("benchmarks/basecall_{sample}_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:

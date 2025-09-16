@@ -5,6 +5,8 @@ rule correct_reads:
         model = DORADO_CORRECTION_MODEL     # parameter taken from and changable in "config/config.yaml"
     output:
         fasta = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta")
+    conda:
+        DIR_ENVS.joinpath("dorado.yaml")      # activating conda environment needed for this module
     benchmark:
         DIR_RES.joinpath("benchmarks/correct_{sample}_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
