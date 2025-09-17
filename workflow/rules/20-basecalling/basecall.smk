@@ -15,10 +15,10 @@ rule basecall:
     benchmark:
         DIR_RES.joinpath("benchmarks/basecall_{sample}_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
-        mem_mb = 4000 ### MEM_BASECALL,      # parameter taken from and changable in "config/config.yaml"
-        ### gpu = GPU_BASECALL          # ^^
+        mem_mb = MEM_BASECALL,      # parameter taken from and changable in "config/config.yaml"
+        gpu = GPU_BASECALL          # ^^
     threads:
-        16 ### CPU_BASECALL                # ^^
+        CPU_BASECALL                # ^^
     run:
         try:
             shell(f"{DORADO_BIN} basecaller --device cuda:all {DORADO_MODEL} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")

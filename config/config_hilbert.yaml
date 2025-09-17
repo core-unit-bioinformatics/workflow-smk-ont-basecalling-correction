@@ -1,7 +1,7 @@
 # Global configuration for the workflow "workflow-smk-ont-basecalling-correction"
 
 # Path to the samplesheet (must be TSV with columns: sample_name, file_path)
-samplesheet: "/gpfs/project/projects/medbioinf/users/semey101/ont-basecalling-correction/samples/sample-sheet_4mrgn_test-1.tsv"        
+samplesheet: "/gpfs/project/projects/medbioinf/users/semey101/ont-basecalling-correction/samples/samples_complete_hilbert_bc01.tsv"        
 
 # Paths to the Dorado installation and the needed models (needs to be modified to fit the users installation paths)
 dorado_bin: "dorado"     # TO DO: add code for an online/offline switch.
@@ -15,13 +15,13 @@ dorado_kit: "SQK-NBD114-24"
 pod5_convert_bin: "pod5"    # TO DO: add code for an online/offline switch.
 
 # Resources                 # TO DO: allocate these within the modules?
-cpu_correct: 32
-cpu_basecall: 32
+cpu_correct: 16
+cpu_basecall: 16
 cpu_convert: 4
 
-mem_correct: 128000    # 128gb 
-mem_basecall: 128000    # 128gb
-mem_convert: 8000      # 8gb
+mem_correct: 32000    # 32gb 
+mem_basecall: 32000    # 32gb 
+mem_convert: 4000      # 4gb
 
-gpu_correct: 4
-gpu_basecall: 4
+gpu_correct: 2
+gpu_basecall: 2

@@ -10,10 +10,10 @@ rule correct_reads:
     benchmark:
         DIR_RES.joinpath("benchmarks/correct_{sample}_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
-        mem_mb = 4000 ### MEM_CORRECT,       # parameter taken from and changable in "config/config.yaml"
-        ### gpu = GPU_CORRECT           # ^^
+        mem_mb = MEM_CORRECT,       # parameter taken from and changable in "config/config.yaml"
+        gpu = GPU_CORRECT           # ^^
     threads:
-        16 ### CPU_CORRECT                 # ^^
+        CPU_CORRECT                 # ^^
     run:
         try:
             shell(f"{DORADO_BIN} correct --device cuda:all -m {input.model} {input.fastq} > {output.fasta}")
