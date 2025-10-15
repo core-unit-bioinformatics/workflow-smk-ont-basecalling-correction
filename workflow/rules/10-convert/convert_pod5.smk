@@ -7,7 +7,7 @@ rule convert_to_pod5:
     conda:
         DIR_ENVS.joinpath("pod5.yaml")      # activating conda environment needed for this module
     benchmark:
-        DIR_RES.joinpath("benchmarks/convert_{sample}_benchmark.txt")   # writing needed ressources to a benchmark file
+        DIR_RES.joinpath("benchmarks/{sample}_convert_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
         mem_mb = MEM_CONVERT        # parameter taken from and changable in "config/config.yaml"
     threads:

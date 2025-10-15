@@ -13,7 +13,7 @@ rule basecall:
     conda:
         DIR_ENVS.joinpath("dorado.yaml")      # activating conda environment needed for this module
     benchmark:
-        DIR_RES.joinpath("benchmarks/basecall_{sample}_benchmark.txt")   # writing needed ressources to a benchmark file
+        DIR_RES.joinpath("benchmarks/{sample}_basecall_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
         mem_mb = MEM_BASECALL,      # parameter taken from and changable in "config/config.yaml"
         gpu = GPU_BASECALL          # ^^
