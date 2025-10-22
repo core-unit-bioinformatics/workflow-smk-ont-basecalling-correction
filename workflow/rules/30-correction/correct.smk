@@ -1,7 +1,7 @@
 # correcting basecalled fastq files into fasta files
 rule correct_reads:
     input:
-        fastq = DIR_RES.joinpath("basecalled_pod5/{sample}_basecalled.fastq"),  
+        fastq = DIR_RES.joinpath("basecalled_fastq/{sample}_basecalled.fastq"),  
         model = DORADO_CORRECTION_MODEL     # parameter taken from and changable in "config/config.yaml"
     output:
         fasta = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta")
@@ -11,7 +11,8 @@ rule correct_reads:
         DIR_RES.joinpath("benchmarks/{sample}_correct_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
         mem_mb = MEM_CORRECT,       # parameter taken from and changable in "config/config.yaml"
-    #    gpu = GPU_CORRECT           # ^^
+        gpu = GPU_CORRECT,          # ^^
+        time_hrs = WALLTIME_CORRECT # ^^
     threads:
         CPU_CORRECT                 # ^^
     run:

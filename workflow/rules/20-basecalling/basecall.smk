@@ -9,16 +9,17 @@ rule basecall:
             else samples_dict[wc.sample]["path"]
         )
     output:
-        fastq = DIR_RES.joinpath("basecalled_pod5/{sample}_basecalled.fastq")       # 
+        fastq = DIR_RES.joinpath("basecalled_fastq/{sample}_basecalled.fastq")       # 
     conda:
         DIR_ENVS.joinpath("dorado.yaml")      # activating conda environment needed for this module
     benchmark:
         DIR_RES.joinpath("benchmarks/{sample}_basecall_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
-        mem_mb = MEM_BASECALL,      # parameter taken from and changable in "config/config.yaml"
-        gpu = GPU_BASECALL          # ^^
+        mem_mb = MEM_BASECALL,          # parameter taken from and changable in "config/config.yaml"
+        gpu = GPU_BASECALL,             # ^^
+        time_hrs = WALLTIME_BASECALL    # ^^
     threads:
-        CPU_BASECALL                # ^^
+        CPU_BASECALL                    # ^^
     run:
         try:
             shell(f"{DORADO_BIN} basecaller --device cuda:all {DORADO_MODEL} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")

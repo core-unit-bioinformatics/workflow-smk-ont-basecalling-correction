@@ -11,6 +11,9 @@ DORADO_KIT = config["dorado_kit"]
 DORADO_CORRECTION_MODEL = config["dorado_correction_model"]
 
 # Resources
+GPU_CORRECT = config["gpu_correct"]
+GPU_BASECALL = config["gpu_basecall"]
+
 CPU_CORRECT = config["cpu_correct"]
 CPU_BASECALL = config["cpu_basecall"]
 CPU_CONVERT = config["cpu_convert"]
@@ -19,5 +22,6 @@ MEM_CORRECT = config["mem_correct"]
 MEM_BASECALL = config["mem_basecall"]
 MEM_CONVERT = config["mem_convert"]
 
-GPU_CORRECT = config["gpu_correct"]
-GPU_BASECALL = config["gpu_basecall"]
+WALLTIME_CORRECT = config["walltime_correct"]
+WALLTIME_BASECALL = config["walltime_basecall"]
+WALLTIME_CONVERT = config["walltime_convert"]

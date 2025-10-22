@@ -9,9 +9,10 @@ rule convert_to_pod5:
     benchmark:
         DIR_RES.joinpath("benchmarks/{sample}_convert_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
-        mem_mb = MEM_CONVERT        # parameter taken from and changable in "config/config.yaml"
+        mem_mb = MEM_CONVERT,           # parameter taken from and changable in "config/config.yaml"
+        time_hrs = WALLTIME_CONVERT     # ^^
     threads:
-        CPU_CONVERT                 # ^^
+        CPU_CONVERT                     # ^^
     run:
         try:
             shell(f"pod5 convert fast5 {input.fast5} --output {output.pod5}")
