@@ -1,7 +1,7 @@
 # Global configuration for the workflow "workflow-smk-ont-basecalling-correction"
 
 # Path to the samplesheet (must be TSV with columns: sample_name, file_path)
-samplesheet: "/gpfs/project/projects/medbioinf/users/semey101/ont-basecalling-correction/samples/sample-sheet_4mrgn_version testing.tsv"
+samplesheet: "/gpfs/project/projects/medbioinf/users/semey101/ont-basecalling-correction/samples/samples_complete_hilbert_bc01.tsv"
 
 # Paths to the Dorado installation and the needed models (needs to be modified to fit the users installation paths)
 dorado_bin_old: "/gpfs/project/projects/medbioinf/users/semey101/software/dorado-0.7.2-linux-x64/bin/dorado"
@@ -18,17 +18,17 @@ pod5_convert_bin: "pod5"
 
 # Resources
 
-gpu_correct: 2
-gpu_basecall: 2
+gpu_correct: 4
+gpu_basecall: 4
 
-cpu_correct: 8
-cpu_basecall: 8
+cpu_correct: 16
+cpu_basecall: 16
 cpu_convert: 4
 
-mem_correct: 128000
-mem_basecall: 128000
+mem_correct: 251000
+mem_basecall: 251000
 mem_convert: 4000
 
-walltime_correct: 1
-walltime_basecall: 1
+walltime_correct: 71
+walltime_basecall: 71
 walltime_convert: 1
