@@ -10,8 +10,15 @@ rule basecall:
         )
     output:
         fastq = DIR_RES.joinpath("basecalled_fastq/{sample}_basecalled.fastq")       # 
-    conda:
-        DIR_ENVS.joinpath("dorado.yaml")      # activating conda environment needed for this module
+    params:
+        dorado_bin=lambda wc: (
+            DORADO_BIN_OLD if samples_dict[wc.sample]["type"] == "fast5"
+            else DORADO_BIN_NEW
+        ),
+        dorado_model=lambda wc: (
+            DORADO_MODEL_OLD if samples_dict[wc.sample]["type"] == "fast5"
+            else DORADO_MODEL_NEW
+        )
     benchmark:
         DIR_RES.joinpath("benchmarks/{sample}_basecall_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
@@ -22,7 +29,7 @@ rule basecall:
         CPU_BASECALL                    # ^^
     run:
         try:
-            shell(f"{DORADO_BIN} basecaller --device cuda:all {DORADO_MODEL} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")
+            shell(f"{params.dorado_bin} basecaller --device cuda:all {params.dorado_model} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")
             log_step(wildcards.sample, "BASECALL", "SUCCESS")
         except Exception as e:
             log_step(wildcards.sample, "BASECALL", "FAILURE", str(e))

@@ -5,8 +5,11 @@ rule correct_reads:
         model = DORADO_CORRECTION_MODEL     # parameter taken from and changable in "config/config.yaml"
     output:
         fasta = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta")
-    conda:
-        DIR_ENVS.joinpath("dorado.yaml")      # activating conda environment needed for this module
+    params:
+        dorado_bin=lambda wc: (
+            DORADO_BIN_OLD if samples_dict[wc.sample]["type"] == "fast5"
+            else DORADO_BIN_NEW
+        )
     benchmark:
         DIR_RES.joinpath("benchmarks/{sample}_correct_benchmark.txt")   # writing needed ressources to a benchmark file
     resources:
@@ -18,7 +21,7 @@ rule correct_reads:
     run:
         try:
             # shell(f"{DORADO_BIN} correct --device cuda:all -m {input.model} {input.fastq} --index-size 4G > {output.fasta}")
-            shell(f"{DORADO_BIN} correct --device cuda:all -m {input.model} {input.fastq} --verbose > {output.fasta}")
+            shell(f"{params.dorado_bin} correct --device cuda:all -m {input.model} {input.fastq} --verbose > {output.fasta}")
             # shell(f"{DORADO_BIN} correct --device CPU -m {input.model} {input.fastq} > {output.fasta}")
             log_step(wildcards.sample, "CORRECT", "SUCCESS")
         except Exception as e:
