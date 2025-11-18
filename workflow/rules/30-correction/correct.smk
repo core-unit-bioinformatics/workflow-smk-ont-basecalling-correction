@@ -20,8 +20,8 @@ rule correct_reads:
         CPU_CORRECT                 # ^^
     run:
         try:
-            # shell(f"{DORADO_BIN} correct --device cuda:all -m {input.model} {input.fastq} --index-size 4G > {output.fasta}")
             shell(f"{params.dorado_bin} correct --device cuda:all -m {input.model} {input.fastq} --verbose > {output.fasta}")
+            # shell(f"{DORADO_BIN} correct --device cuda:all -m {input.model} {input.fastq} --index-size 4G > {output.fasta}")
             # shell(f"{DORADO_BIN} correct --device CPU -m {input.model} {input.fastq} > {output.fasta}")
             log_step(wildcards.sample, "CORRECT", "SUCCESS")
         except Exception as e:
