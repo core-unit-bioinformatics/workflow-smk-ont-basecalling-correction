@@ -8,10 +8,13 @@ in the main Snakefile
 
 WORKFLOW_OUTPUT = []
 
-# List outputs from modules
-#WORKFLOW_OUTPUT.extend(CONVERT_OUTPUT)     # ask for output ot the conversion module
-#WORKFLOW_OUTPUT.extend(BASECALL_OUTPUT)     # ask for output ot the basecalling module
-WORKFLOW_OUTPUT.extend(CORRECT_OUTPUT)     # ask for output ot the correction module
+# output from module "convert_pod5.smk"
+CONVERT_OUTPUT = rules.run_all_convert_to_pod5.input.pod5
+# output from module "basecall.smk"
+BASECALL_OUTPUT = rules.run_all_basecall.input.fastq
+# output from module "correct.smk"
+CORRECT_OUTPUT = rules.run_all_correct_reads.input.fasta
+
 
 
 # Example for extending the output
