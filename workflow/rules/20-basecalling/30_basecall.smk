@@ -22,11 +22,13 @@ rule basecall:
     benchmark:
         DIR_BENCHMARK.joinpath("{sample}_basecall_benchmark.txt")   # writing to directory "rsrc
     resources:
-        mem_mb = MEM_BASECALL,
-        gpu = GPU_BASECALL,
-        time_hrs = WALLTIME_BASECALL
+        mem_mb = mem_mb = lambda wc, attempt: (128 * 1024) + (128 * 1024) * attempt,
+        time_hrs = 71,
+        ### time_hrs = 1,   # swap with active time_hrs for small tests
+        gpu = (4) + (2) * attempt
+        ### gpu = 1         # swap with active gpu for small tests
     threads:
-        CPU_BASECALL
+        CPU_HIGH
     run:
         try:
             shell(f"{params.dorado_bin} basecaller --device cuda:all {params.dorado_model} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")

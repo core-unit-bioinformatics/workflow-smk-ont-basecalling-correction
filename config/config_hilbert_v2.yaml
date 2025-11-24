@@ -17,18 +17,3 @@ dorado_kit: "SQK-NBD114-24"
 pod5_convert_bin: "pod5"
 
 # Resources
-
-gpu_correct: 1
-gpu_basecall: 1
-
-cpu_correct: 8
-cpu_basecall: 8
-cpu_convert: 4
-
-mem_correct: 128000
-mem_basecall: 128000
-mem_convert: 4000
-
-walltime_correct: 1
-walltime_basecall: 1
-walltime_convert: 1

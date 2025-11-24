@@ -9,10 +9,10 @@ rule convert_to_pod5:
     benchmark:
         DIR_BENCHMARK.joinpath("{sample}_convert_benchmark.txt")   # writing to directory "rsrc
     resources:
-        mem_mb = MEM_CONVERT,
-        time_hrs = WALLTIME_CONVERT
+        mem_mb = lambda wc, attempt: (4 * 1024) + (4 * 1024) * attempt
+        time_hrs = lambda wc, attempt: (1) + (1) * attempt
     threads:
-        CPU_CONVERT
+        CPU_LOW
     run:
         try:
             shell(f"pod5 convert fast5 {input.fast5} --output {output.pod5}")

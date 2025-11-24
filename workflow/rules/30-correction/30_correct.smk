@@ -13,11 +13,13 @@ rule correct_reads:
     benchmark:
         DIR_BENCHMARK.joinpath("{sample}_correct_benchmark.txt")   # writing to directory "rsrc
     resources:
-        mem_mb = MEM_CORRECT,
-        gpu = GPU_CORRECT,
-        time_hrs = WALLTIME_CORRECT
+        mem_mb = mem_mb = mem_mb = lambda wc, attempt: (128 * 1024) + (128 * 1024) * attempt,
+        time_hrs = 71,
+        ### time_hrs = 1,   # swap with active time_hrs for small tests
+        gpu = (4) + (2) * attempt
+        ### gpu = 1         # swap with active gpu for small tests
     threads:
-        CPU_CORRECT
+        CPU_HIGH
     run:
         try:
             shell(f"{params.dorado_bin} correct --device cuda:all -m {input.model} {input.fastq} --verbose > {output.fasta}")
