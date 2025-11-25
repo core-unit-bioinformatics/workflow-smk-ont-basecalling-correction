@@ -40,6 +40,7 @@ rule basecall:
             log_step(wildcards.sample, "BASECALL", "SUCCESS")
         except Exception as e:
             log_step(wildcards.sample, "BASECALL", "FAILURE", str(e))
+            raise
 
 # output definition
 rule run_all_basecall:

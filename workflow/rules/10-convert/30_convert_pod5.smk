@@ -15,7 +15,7 @@ rule convert_to_pod5:
         CPU_LOW
     run:
         cmd = f"pod5 convert fast5 {input.fast5} --output {output.pod5}"
-        
+
         if snakemake.printshellcmds:    # command only printed when "-p" is used on the snakemake call
         print(cmd, flush=True)
 
@@ -24,6 +24,7 @@ rule convert_to_pod5:
             log_step(wildcards.sample, "CONVERT", "SUCCESS")
         except Exception as e:
             log_step(wildcards.sample, "CONVERT", "FAILURE", str(e))
+            raise
 
 # output definition
 rule run_all_convert_to_pod5:
