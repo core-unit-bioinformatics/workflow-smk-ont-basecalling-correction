@@ -5,6 +5,9 @@ rule correct_reads:
         model = DORADO_CORRECTION_MODEL
     output:
         fasta = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta")
+        gz = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta.gz")
+    conda:
+        DIR_ENVS.joinpath("gzip.yaml")
     params:
         dorado_bin=lambda wc: (
             DORADO_BIN_OLD if samples_dict[wc.sample]["type"] == "fast5"
@@ -21,21 +24,23 @@ rule correct_reads:
     threads:
         CPU_HIGH
     run:
-        cmd = f"{params.dorado_bin} correct --device cuda:all -m {input.model} {input.fastq} --verbose > {output.fasta}"
-        
+        cmd1 = f"{params.dorado_bin} correct --device cuda:all -m {input.model} {input.fastq} --verbose > {output.fasta}"
+        cmd2 = f"gzip -c {output.fasta} > {output.gz}
+
         if snakemake.printshellcmds:    # command only printed when "-p" is used on the snakemake call
-            print(cmd, flush=True)
+            print(cmd1, flush=True)
+            print(cmd2, flush=True)
 
         try:
-            shell(cmd)
+            shell(cmd1)
+            shell(cmd2)
             log_step(wildcards.sample, "CORRECT", "SUCCESS")
         except Exception as e:
             log_step(wildcards.sample, "CORRECT", "FAILURE", str(e))
+            raise
 
 # output definition
 rule run_all_correct_reads:
     input:
-        fastq = expand(
-            rules.correct_reads.output.fasta,
-            sample=SAMPLES
-        )
+        fasta = expand(rules.correct_reads.output.fasta, sample=SAMPLES)
+        gz = expand(rules.correct_reads.output.gz, sample=SAMPLES)
