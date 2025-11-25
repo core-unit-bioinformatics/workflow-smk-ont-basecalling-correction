@@ -21,8 +21,13 @@ rule correct_reads:
     threads:
         CPU_HIGH
     run:
+        cmd = f"{params.dorado_bin} correct --device cuda:all -m {input.model} {input.fastq} --verbose > {output.fasta}"
+        
+        if snakemake.printshellcmds:    # command only printed when "-p" is used on the snakemake call
+            print(cmd, flush=True)
+
         try:
-            shell(f"{params.dorado_bin} correct --device cuda:all -m {input.model} {input.fastq} --verbose > {output.fasta}")
+            shell(cmd)
             log_step(wildcards.sample, "CORRECT", "SUCCESS")
         except Exception as e:
             log_step(wildcards.sample, "CORRECT", "FAILURE", str(e))

@@ -14,8 +14,13 @@ rule convert_to_pod5:
     threads:
         CPU_LOW
     run:
+        cmd = f"pod5 convert fast5 {input.fast5} --output {output.pod5}"
+        
+        if snakemake.printshellcmds:    # command only printed when "-p" is used on the snakemake call
+        print(cmd, flush=True)
+
         try:
-            shell(f"pod5 convert fast5 {input.fast5} --output {output.pod5}")
+            shell(cmd)
             log_step(wildcards.sample, "CONVERT", "SUCCESS")
         except Exception as e:
             log_step(wildcards.sample, "CONVERT", "FAILURE", str(e))

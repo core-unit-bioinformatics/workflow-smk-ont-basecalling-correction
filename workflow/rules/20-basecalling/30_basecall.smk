@@ -30,8 +30,13 @@ rule basecall:
     threads:
         CPU_HIGH
     run:
+        cmd = f"{params.dorado_bin} basecaller --device cuda:all {params.dorado_model} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}"
+        
+        if snakemake.printshellcmds:    # command only printed when "-p" is used on the snakemake call
+        print(cmd, flush=True)
+
         try:
-            shell(f"{params.dorado_bin} basecaller --device cuda:all {params.dorado_model} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}")
+            shell(cmd)
             log_step(wildcards.sample, "BASECALL", "SUCCESS")
         except Exception as e:
             log_step(wildcards.sample, "BASECALL", "FAILURE", str(e))
