@@ -37,9 +37,9 @@ rule basecall:
 
         try:
             shell(cmd)
-            log_step(wildcards.sample, "BASECALL", "SUCCESS")
+            log_step(wildcards, "BASECALL", "SUCCESS")
         except Exception as e:
-            log_step(wildcards.sample, "BASECALL", "FAILURE", str(e))
+            log_step(wildcards, "BASECALL", "FAILURE", str(e))
             raise
 
 # output definition
@@ -49,3 +49,4 @@ rule run_all_basecall:
             rules.basecall.output.fastq,
             sample=SAMPLES
         )
+        

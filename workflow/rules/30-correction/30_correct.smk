@@ -34,9 +34,9 @@ rule correct_reads:
         try:
             shell(cmd1)
             shell(cmd2)
-            log_step(wildcards.sample, "CORRECT", "SUCCESS")
+            log_step(wildcards, "CORRECT", "SUCCESS")
         except Exception as e:
-            log_step(wildcards.sample, "CORRECT", "FAILURE", str(e))
+            log_step(wildcards, "CORRECT", "FAILURE", str(e))
             raise
 
 # output definition
@@ -44,3 +44,4 @@ rule run_all_correct_reads:
     input:
         fasta = expand(rules.correct_reads.output.fasta, sample=SAMPLES)
         gz = expand(rules.correct_reads.output.gz, sample=SAMPLES)
+        

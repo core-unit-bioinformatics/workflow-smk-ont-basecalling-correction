@@ -21,9 +21,9 @@ rule convert_to_pod5:
 
         try:
             shell(cmd)
-            log_step(wildcards.sample, "CONVERT", "SUCCESS")
+            log_step(wildcards, "CONVERT", "SUCCESS")
         except Exception as e:
-            log_step(wildcards.sample, "CONVERT", "FAILURE", str(e))
+            log_step(wildcards, "CONVERT", "FAILURE", str(e))
             raise
 
 # output definition
