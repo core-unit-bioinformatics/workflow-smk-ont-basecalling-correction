@@ -13,7 +13,8 @@ CONVERT_OUTPUT = rules.run_all_convert_to_pod5.input.pod5
 # output from module "basecall.smk"
 BASECALL_OUTPUT = rules.run_all_basecall.input.fastq
 # output from module "correct.smk"
-CORRECT_OUTPUT = rules.run_all_correct_reads.input.fasta
+CORRECT_FASTA_OUTPUT = rules.run_all_correct_reads.input.fasta
+CORRECT_GZ_OUTPUT = rules.run_all_correct_reads.input.gz
 
 
 
