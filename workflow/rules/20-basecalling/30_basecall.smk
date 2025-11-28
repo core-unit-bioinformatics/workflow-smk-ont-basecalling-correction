@@ -25,8 +25,8 @@ rule basecall:
         mem_mb = mem_mb = lambda wc, attempt: (128 * 1024) + (128 * 1024) * attempt,
         time_hrs = 71,
         ### time_hrs = 1,   # swap with active time_hrs for small tests
-        gpu = (4) + (2) * attempt
-        ### gpu = 1         # swap with active gpu for small tests
+        gpus = (4) + (2) * attempt
+        ### gpus = 1         # swap with active gpu for small tests
     threads:
         CPU_HIGH
     run:
