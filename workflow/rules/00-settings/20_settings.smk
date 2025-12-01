@@ -2,12 +2,12 @@
 SAMPLESHEET = config["samplesheet"]
 
 # Tools
-DORADO_BIN_OLD = config["dorado_bin_old"]
-DORADO_BIN_NEW = config["dorado_bin_new"]
-POD5_BIN = config["pod5_convert_bin"]
+DORADO_FAST5_URL = config["dorado_fast5_url"]	# remove after dorado setup integration
+DORADO_POD5_URL = config["dorado_pod5_url"]	# remove after dorado setup integration
 
 # Models and kit
-DORADO_MODEL_OLD = config["dorado_sup_model_old"]
-DORADO_MODEL_NEW = config["dorado_sup_model_new"]
+DORADO_MODEL_FAST5 = config["dorado_model_fast5"]
+DORADO_MODEL_POD5 = config["dorado_model_pod5"]
+DORADO_MODEL_CORRECTION = config["dorado_model_correction"]
+
 DORADO_KIT = config["dorado_kit"]
-DORADO_CORRECTION_MODEL = config["dorado_correction_model"]
