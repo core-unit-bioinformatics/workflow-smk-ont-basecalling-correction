@@ -4,14 +4,11 @@
 samplesheet: "/gpfs/project/projects/medbioinf/users/semey101/ont-basecalling-correction/samples/sample-sheet_4mrgn_test-1.tsv"
 
 # Paths to the Dorado installation and the needed models (needs to be modified to fit the users installation paths)
-dorado_bin_old: "/gpfs/project/projects/medbioinf/users/semey101/software/dorado-0.7.2-linux-x64/bin/dorado"
-dorado_bin_new: "/gpfs/project/projects/medbioinf/users/semey101/software/dorado-0.9.2-linux-x64/bin/dorado"
-dorado_sup_model_old: "/gpfs/project/projects/medbioinf/users/semey101/ont-basecalling-correction/dorado_models/dna_r10.4.1_e8.2_400bps_sup@v4.1.0"
-dorado_sup_model_new: "/gpfs/project/projects/medbioinf/users/semey101/ont-basecalling-correction/dorado_models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0"
-dorado_correction_model: "/gpfs/project/projects/medbioinf/users/semey101/ont-basecalling-correction/dorado_models/herro-v1"
+dorado_fast5_url: "https://cdn.oxfordnanoportal.com/software/analysis/dorado-0.7.2-linux-x64.tar.gz"
+dorado_pod5_url: "https://cdn.oxfordnanoportal.com/software/analysis/dorado-0.9.2-linux-x64.tar.gz"
+dorado_model_fast5: "dna_r10.4.1_e8.2_400bps_sup@v4.1.0"
+dorado_model_pod5: "dna_r10.4.1_e8.2_400bps_sup@v5.2.0"
+dorado_model_correction: "herro-v1"
 
 # Dorado kit (needs to be modified to fit the users parameters)
 dorado_kit: "SQK-NBD114-24"
-
-# Paths to the pod5 installation (is installed via conda in this path if online; otherwise needs to be modified to fit the users installation paths or be included in PATH)
-pod5_convert_bin: "pod5"
