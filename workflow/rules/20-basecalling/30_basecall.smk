@@ -1,24 +1,12 @@
 # basecalling pod5 files into fastq files
 rule basecall:
     input:
-        pod5=lambda wc: (
-            # if fast5, use converted pod5
-            DIR_RES.joinpath(f"converted_pod5/{wc.sample}.pod5")
-            if samples_dict[wc.sample]["type"] == "fast5"
-            # if pod5, use original path
-            else samples_dict[wc.sample]["path"]
-        )
+        pod5=lambda wc: BASECALL_INPUT[wc.sample]
     output:
         fastq = DIR_RES.joinpath("basecalled_fastq/{sample}_basecalled.fastq")
     params:
-        dorado_bin=lambda wc: (
-            DORADO_BIN_OLD if samples_dict[wc.sample]["type"] == "fast5"
-            else DORADO_BIN_NEW
-        ),
-        dorado_model=lambda wc: (
-            DORADO_MODEL_OLD if samples_dict[wc.sample]["type"] == "fast5"
-            else DORADO_MODEL_NEW
-        )
+        dorado_bin = lambda wc: BASECALL_DORADO_BIN[wc.sample],
+        dorado_model = lambda wc: BASECALL_DORADO_MODEL[wc.sample]
     benchmark:
         DIR_BENCHMARK.joinpath("{sample}_basecall_benchmark.txt")   # writing to directory "rsrc
     resources:

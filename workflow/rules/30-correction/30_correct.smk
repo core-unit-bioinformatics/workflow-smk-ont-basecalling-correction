@@ -1,18 +1,15 @@
 # correcting basecalled fastq files into fasta files
 rule correct_reads:
     input:
-        fastq = DIR_RES.joinpath("basecalled_fastq/{sample}_basecalled.fastq"),  
-        model = DORADO_CORRECTION_MODEL
+        fastq = DIR_RES.joinpath("basecalled_fastq/{sample}_basecalled.fastq")
     output:
         fasta = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta")
         gz = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta.gz")
     conda:
         DIR_ENVS.joinpath("gzip.yaml")
     params:
-        dorado_bin=lambda wc: (
-            DORADO_BIN_OLD if samples_dict[wc.sample]["type"] == "fast5"
-            else DORADO_BIN_NEW
-        )
+        dorado_bin = lambda wc: CORRECT_DORADO_BIN[wc.sample],  
+        dorado_model = MODEL_PATH_CORRECTION 
     benchmark:
         DIR_BENCHMARK.joinpath("{sample}_correct_benchmark.txt")   # writing to directory "rsrc
     resources:
@@ -24,7 +21,7 @@ rule correct_reads:
     threads:
         CPU_HIGH
     run:
-        cmd1 = f"{params.dorado_bin} correct --device cuda:all -m {input.model} {input.fastq} --verbose > {output.fasta}"
+        cmd1 = f"{params.dorado_bin} correct --device cuda:all -m {params.dorado_model} {input.fastq} --verbose > {output.fasta}"
         cmd2 = f"gzip -c {output.fasta} > {output.gz}
 
         if snakemake.printshellcmds:    # command only printed when "-p" is used on the snakemake call
