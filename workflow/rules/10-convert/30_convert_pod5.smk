@@ -9,16 +9,13 @@ rule convert_to_pod5:
     benchmark:
         DIR_BENCHMARK.joinpath("{sample}_convert_benchmark.txt")   # writing to directory "rsrc
     resources:
-        mem_mb = lambda wc, attempt: (4 * 1024) + (4 * 1024) * attempt
-        time_hrs = lambda wc, attempt: (1) + (1) * attempt
+        mem_mb = lambda wc, attempt: (4 * 1024) + (4 * 1024) * (attempt-1),
+        time_hrs = lambda wc, attempt: (1) + (1) * (attempt-1)
     threads:
         CPU_LOW
     run:
         cmd = f"pod5 convert fast5 {input.fast5} --output {output.pod5}"
-
-        if snakemake.printshellcmds:    # command only printed when "-p" is used on the snakemake call
         print(cmd, flush=True)
-
         try:
             shell(cmd)
             log_step(wildcards, "CONVERT", "SUCCESS")
@@ -29,7 +26,4 @@ rule convert_to_pod5:
 # output definition
 rule run_all_convert_to_pod5:
     input:
-        pod5 = expand(
-            rules.convert_to_pod5.output.pod5,
-            sample=SAMPLES
-        )
+        pod5 = expand(rules.convert_to_pod5.output.pod5, sample=SAMPLES)
