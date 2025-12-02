@@ -8,13 +8,20 @@ in the main Snakefile
 
 WORKFLOW_OUTPUT = []
 
+# output from module "sorado_setup.smk"
+WORKFLOW_OUTPUT.extend(rules.run_all_dorado_setup.input.dorado_fast5)
+WORKFLOW_OUTPUT.extend(rules.run_all_dorado_setup.input.dorado_pod5)
+WORKFLOW_OUTPUT.extend(rules.run_all_dorado_setup.input.model_fast5)
+WORKFLOW_OUTPUT.extend(rules.run_all_dorado_setup.input.model_pod5)
+WORKFLOW_OUTPUT.extend(rules.run_all_dorado_setup.input.model_herro)
+
 # output from module "convert_pod5.smk"
-CONVERT_OUTPUT = rules.run_all_convert_to_pod5.input.pod5
+WORKFLOW_OUTPUT.extend(rules.run_all_convert_to_pod5.input.pod5)
 # output from module "basecall.smk"
-BASECALL_OUTPUT = rules.run_all_basecall.input.fastq
+WORKFLOW_OUTPUT.extend(rules.run_all_basecall.input.fastq)
 # output from module "correct.smk"
-CORRECT_FASTA_OUTPUT = rules.run_all_correct_reads.input.fasta
-CORRECT_GZ_OUTPUT = rules.run_all_correct_reads.input.gz
+WORKFLOW_OUTPUT.extend(rules.run_all_correct_reads.input.fasta)
+WORKFLOW_OUTPUT.extend(rules.run_all_correct_reads.input.gz)
 
 
 
