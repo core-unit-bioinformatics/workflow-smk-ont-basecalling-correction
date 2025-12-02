@@ -1,15 +1,15 @@
 import pathlib as pl
 
 # dorado directory inside WD
-DORADO_BASE = DIR_WORKING.joinpath("dorado")
-DORADO_MODELS = DORADO_BASE.joinpath("models")
+DORADO_BINARIES = DIR_WORKING.joinpath("dorado/binaries")
+DORADO_MODELS = DIR_WORKING.joinpath("dorado/models")
 
 # extract directory name from URL
 def version_from_url(url):
     return pl.Path(url).name.replace(".tar.gz", "")
 
-DIR_FAST5 = DORADO_BASE.joinpath(version_from_url(DORADO_FAST5_URL))
-DIR_POD5 = DORADO_BASE.joinpath(version_from_url(DORADO_POD5_URL))
+DIR_FAST5 = DORADO_BINARIES.joinpath(version_from_url(DORADO_FAST5_URL))
+DIR_POD5 = DORADO_BINARIES.joinpath(version_from_url(DORADO_POD5_URL))
 
 # download dorado binaries
 rule dorado_fast5:
@@ -20,10 +20,10 @@ rule dorado_fast5:
         tgz = pl.Path(DORADO_FAST5_URL).name
     shell:
         r"""
-        mkdir -p {DORADO_BASE}
-        wget -O {DORADO_BASE}/{params.tgz} {params.url}
-        tar -xzf {DORADO_BASE}/{params.tgz} -C {DORADO_BASE}
-        rm {DORADO_BASE}/{params.tgz}
+        mkdir -p {DORADO_BINARIES}
+        wget -O {DORADO_BINARIES}/{params.tgz} {params.url}
+        tar -xzf {DORADO_BINARIES}/{params.tgz} -C {DORADO_BINARIES}
+        rm {DORADO_BINARIES}/{params.tgz}
         """
 
 rule dorado_pod5:
@@ -34,10 +34,10 @@ rule dorado_pod5:
         tgz = pl.Path(DORADO_POD5_URL).name
     shell:
         r"""
-        mkdir -p {DORADO_BASE}
-        wget -O {DORADO_BASE}/{params.tgz} {params.url}
-        tar -xzf {DORADO_BASE}/{params.tgz} -C {DORADO_BASE}
-        rm {DORADO_BASE}/{params.tgz}
+        mkdir -p {DORADO_BINARIES}
+        wget -O {DORADO_BINARIES}/{params.tgz} {params.url}
+        tar -xzf {DORADO_BINARIES}/{params.tgz} -C {DORADO_BINARIES}
+        rm {DORADO_BINARIES}/{params.tgz}
         fi
         """
 
