@@ -23,8 +23,17 @@ rule correct_reads:
         CPU_HIGH
         ### CPU_MEDIUM       # swap with active gpu for small tests
     run:
-        cmd1 = f"{input.dorado_bin} correct --device cuda:all -m {params.dorado_model} {input.fastq} --verbose > {output.fasta}"
-        cmd2 = f"gzip -c {output.fasta} > {output.gz}"
+        cmd1 = (
+            f"{input.dorado_bin} correct "
+            f"  --device cuda:all "
+            f"  -m {params.dorado_model} "
+            f"  {input.fastq} "
+            f"  --verbose "
+            f"  > {output.fasta}"
+        )
+        cmd2 = 
+            f"gzip -c {output.fasta} "
+            f"  > {output.gz}"
         print(cmd1, flush=True)
         print(cmd2, flush=True)
         try:

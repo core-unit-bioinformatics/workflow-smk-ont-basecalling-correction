@@ -14,7 +14,11 @@ rule convert_to_pod5:
     threads:
         CPU_LOW
     run:
-        cmd = f"pod5 convert fast5 {input.fast5} --output {output.pod5}"
+        cmd = (
+            f"pod5 convert "
+            f"  fast5 {input.fast5} "
+            f"  --output {output.pod5}"
+        )
         print(cmd, flush=True)
         try:
             shell(cmd)

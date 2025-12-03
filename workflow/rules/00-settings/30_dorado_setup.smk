@@ -20,7 +20,7 @@ rule dorado_fast5:
         url = DORADO_FAST5_URL,
         tgz = pl.Path(DORADO_FAST5_URL).name
     shell:
-        r"""
+        """
         mkdir -p {DORADO_BINARIES}
         wget -O {DORADO_BINARIES}/{params.tgz} {params.url}
         tar -xzf {DORADO_BINARIES}/{params.tgz} -C {DORADO_BINARIES}
@@ -35,7 +35,7 @@ rule dorado_pod5:
         url = DORADO_POD5_URL,
         tgz = pl.Path(DORADO_POD5_URL).name
     shell:
-        r"""
+        """
         mkdir -p {DORADO_BINARIES}
         wget -O {DORADO_BINARIES}/{params.tgz} {params.url}             
         tar -xzf {DORADO_BINARIES}/{params.tgz} -C {DORADO_BINARIES}
@@ -53,22 +53,28 @@ rule dorado_models:
         model_pod5 = directory(DORADO_MODELS / DORADO_MODEL_POD5),
         model_herro = directory(DORADO_MODELS / DORADO_MODEL_CORRECTION)
     shell:
-        r"""
+        """
         mkdir -p {DORADO_MODELS}
 
         # fast5 model
         if [ ! -f "{DORADO_MODELS}/{DORADO_MODEL_FAST5}" ]; then
-            {input.fast5_bin} download --model {DORADO_MODEL_FAST5} --directory {DORADO_MODELS}
+            {input.fast5_bin} download \
+                --model {DORADO_MODEL_FAST5} \
+                --directory {DORADO_MODELS}
         fi
 
         # pod5 model
         if [ ! -f "{DORADO_MODELS}/{DORADO_MODEL_POD5}" ]; then
-            {input.pod5_bin} download --model {DORADO_MODEL_POD5} --directory {DORADO_MODELS}
+            {input.pod5_bin} download \
+                --model {DORADO_MODEL_POD5} \
+                --directory {DORADO_MODELS}
         fi
 
         # correction model
         if [ ! -f "{DORADO_MODELS}/{DORADO_MODEL_CORRECTION}" ]; then
-            {input.pod5_bin} download --model {DORADO_MODEL_CORRECTION} --directory {DORADO_MODELS}
+            {input.pod5_bin} download \
+                --model {DORADO_MODEL_CORRECTION} \
+                --directory {DORADO_MODELS}
         fi
         """
 

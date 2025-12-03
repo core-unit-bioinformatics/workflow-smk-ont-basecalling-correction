@@ -20,8 +20,17 @@ rule basecall:
         CPU_HIGH
         ### CPU_MEDIUM              # swap with active gpu for small tests
     run:
-        cmd = f"{input.dorado_bin} basecaller --device cuda:all {params.dorado_model} --kit-name {DORADO_KIT} {input.pod5} --trim all --emit-fastq > {output.fastq}"
-        print(cmd, flush=True)
+        cmd = (
+            f"{input.dorado_bin} basecaller "
+            f"  --device cuda:all "
+            f"  {params.dorado_model} "
+            f"  --kit-name {DORADO_KIT} "
+            f"  {input.pod5} "
+            f"  --trim all "
+            f"  --emit-fastq "
+            f"  > {output.fastq}"
+        )
+    print(cmd, flush=True)
         try:
             shell(cmd)
             log_step(wildcards, "BASECALL", "SUCCESS")

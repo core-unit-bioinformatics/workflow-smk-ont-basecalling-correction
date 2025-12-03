@@ -1,6 +1,4 @@
-import datetime
-
-# create a log file for the pipeline run
+# create basic log file for the pipeline run
 LOG_FILE = DIR_LOG.joinpath("ont-basecalling-correction.log")
 
 def log_step(wildcards, step, status, msg=""):
@@ -10,7 +8,7 @@ def log_step(wildcards, step, status, msg=""):
     """
 
     # time
-    timestamp = datetime.datetime.now()
+    timestamp = get_timestamp()
     # wildcards
     wc_dict = dict(wildcards)
     # fixed columns
