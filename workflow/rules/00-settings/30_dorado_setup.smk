@@ -14,32 +14,35 @@ DIR_POD5 = DORADO_BINARIES.joinpath(version_from_url(DORADO_POD5_URL))
 # download dorado binaries (needs internet connection)
 rule dorado_fast5:
     output:
-        dorado_fast5 = directory(DIR_FAST5),
-        fast5_bin = DIR_FAST5.joinpath("bin/dorado")
+        dorado_fast5 = protected(directory(DIR_FAST5)),
+        fast5_bin = protected(DIR_FAST5.joinpath("bin/dorado"))
     params:
         url = DORADO_FAST5_URL,
         tgz = pl.Path(DORADO_FAST5_URL).name
     shell:
         """
         mkdir -p {DORADO_BINARIES}
-        wget -O {DORADO_BINARIES}/{params.tgz} {params.url}
-        tar -xzf {DORADO_BINARIES}/{params.tgz} -C {DORADO_BINARIES}
-        rm {DORADO_BINARIES}/{params.tgz}
+        if [ ! -d "{DIR_FAST5}" ]; then
+            wget -O "{DORADO_BINARIES}/{params.tgz}" "{params.url}"
+            tar -xzf "{DORADO_BINARIES}/{params.tgz}" -C "{DORADO_BINARIES}"
+            rm "{DORADO_BINARIES}/{params.tgz}"
+        fi
         """
 
 rule dorado_pod5:
     output:
-        dorado_pod5 = directory(DIR_POD5),
-        pod5_bin = DIR_POD5.joinpath("bin/dorado")
+        dorado_pod5 = protected(directory(DIR_POD5)),
+        pod5_bin = protected(DIR_POD5.joinpath("bin/dorado"))
     params:
         url = DORADO_POD5_URL,
         tgz = pl.Path(DORADO_POD5_URL).name
     shell:
         """
         mkdir -p {DORADO_BINARIES}
-        wget -O {DORADO_BINARIES}/{params.tgz} {params.url}             
-        tar -xzf {DORADO_BINARIES}/{params.tgz} -C {DORADO_BINARIES}
-        rm {DORADO_BINARIES}/{params.tgz}
+        if [ ! -d "{DIR_POD5}" ]; then
+            wget -O "{DORADO_BINARIES}/{params.tgz}" "{params.url}"
+            tar -xzf "{DORADO_BINARIES}/{params.tgz}" -C "{DORADO_BINARIES}"
+            rm "{DORADO_BINARIES}/{params.tgz}"
         fi
         """
 
