@@ -19,7 +19,7 @@ rule convert_to_pod5:
             f"  fast5 {input.fast5} "
             f"  --output {output.pod5}"
         )
-        print(cmd, flush=True)
+        print("Shell command: ", cmd, "\n", flush=True)
         try:
             shell(cmd)
             log_step(wildcards, "CONVERT", "SUCCESS")

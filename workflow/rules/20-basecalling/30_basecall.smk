@@ -10,11 +10,11 @@ rule basecall:
     benchmark:
         DIR_BENCHMARK.joinpath("{sample}_basecall_benchmark.txt")   # writing to directory "rsrc
     resources:
-        mem_mb = lambda wc, attempt: (128 * 1024) + (128 * 1024) * (attempt-1),
+        mem_mb = lambda wc, attempt: (128 * 1024) + (128 * 1024) * (attempt - 1),
         ### mem_mb = (64 * 1024),    # swap with active time_hrs for small tests
         time_hrs = 71,
         ### time_hrs = 1,           # swap with active time_hrs for small tests
-        gpus = (4) + (2) * (attempt-1)
+        gpus = lambda wc, attempt: (4) + (2) * (attempt - 1)
         ### gpus = 1                # swap with active gpu for small tests
     threads:
         CPU_HIGH
@@ -30,7 +30,7 @@ rule basecall:
             f"  --emit-fastq "
             f"  > {output.fastq}"
         )
-    print(cmd, flush=True)
+        print("Shell command: ", cmd, "\n", flush=True)
         try:
             shell(cmd)
             log_step(wildcards, "BASECALL", "SUCCESS")
