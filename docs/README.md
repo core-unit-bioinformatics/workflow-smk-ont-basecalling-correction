@@ -6,21 +6,24 @@ This workflow (re)-basecalls and corrects Oxford Nanopore Technologies sequencin
 
 - Oxford Nanopore Technologies sequencing data for the samples that should be (re-)basecalled and corrected. Either fast5 oder pod5 files are possible. fast5 files will automatically be converted to pod5 files before the basecalling.
 - Please insert the following information into the config file at the mentioned position (workflow-smk-ont-basecalling-correction/config/config.yaml). 
-    - Tab-separated samplesheet containing the sample ID and the path to the sequencing data in the format "[SAMPLE_ID]   [PATH/TO/DATA/FILE.ENDING]", one sample per line. The path accepts either fast5 files, pod5 files, or directories containing one of these formats.
-    - A Dorado installation (see documentation: https://github.com/nanoporetech/dorado), as well as basecalling and correction models fitting your type of data. These are downloadable using dorado. Please look up, which models you need for your data (e.g. on https://github.com/nanoporetech/dorado).
-        - Example - Basecallimg model download: /path/to/dorado download --model dna_r10.4.1_e8.2_400bps_sup@v4.1.0
-        - Example - Correction model download: /path/to/dorado download --model herro-v1
+    - Tab-separated sample sheet containing the coulumn headers "sample_name" and "file_path", as well as one entry of data per line in the format "[SAMPLE_ID]   [/PATH/TO/DATA/FILE.ENDING]", one sample per line. The path accepts either fast5 files, pod5 files, or directories containing one of these formats.
     - The kit used for sequencing (e.g. "SQK-NBD114-24")
-    - A pod5 installation (Install the corresponding conda environment using the file workflow-smk-ont-basecalling-correction/workflow/envs/pod5.yaml).
-    - Available ressources for the different pipeline steps. [WIP]
- 
+- The needed versions of Dorade and it's models (for basecalling and correction), as well as the pod5 tool (for fast5 to pod5 conversion) and gzip are either downloaded and installed during the process or provided via a conda environment (this needs an internet connection!)
+
+- The tool is run from within the directory "workflow-smk-ont-basecalling-correction" using: 
+```
+snakemake -p -d ../wd/ --configfiles config/config.yaml --use-conda --resources mem_mb=131072 --resources gpu=4 --resources time_hrs 71:59 --cores 24 run_all
+```
+- The mentioned resource numbers are the recommended minumum requirements to run this workflow and can be upscaled however much the user desires.
+
 ## Produced output data
 
 - Converted pod5 files, if fast5 input was provided by the user. See path:  /wd/results/converted_pod5/[SAMPLE_ID].pod5
 - Basecalled sequencing data, before the correction step. See path:         /wd/results/basecalled_pod5/[SAMPLE_ID]_basecalled.fastq
 - Basecalled AND corrected sequencing data. See path:                       /wd/results/corrected_fasta/[SAMPLE_ID]_corrected.fasta
-- A log file, containing (user-provided) parameters. See path:              /wd/results/run_config.yaml
-- A log file, listing which pipeline steps succeded. See path:              /wd/results/log-file_ont-basecalling-correction.log
+- A log file, listing which pipeline steps succeded. See path:              /wd/log/log-file_ont-basecalling-correction.log
+- benchmark files for each sample, listing used resources. See path:        /wd/log/[SAMPLE_ID]_correct_benchmark.txt
+
 
 ## User documentation
 

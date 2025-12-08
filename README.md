@@ -19,7 +19,7 @@ For a detailed setup guide, please refer to [the workflow documentation](docs/RE
 ## Required input data
 
 - ONT sequencing data for the samples that should be basecalled and corrected.
-- Comma-separated samplesheet containing sample ID and path to the sequencing data.
+- Tab-separated sample sheet containing sample ID and path to the sequencing data.
 - Dorado, as well as it's basecalling and correction models fitting your type of data.
 - More details in [the workflow documentation](docs/README.md).
 
