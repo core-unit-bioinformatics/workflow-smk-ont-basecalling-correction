@@ -13,9 +13,9 @@ rule correct_reads:
     benchmark:
         DIR_BENCHMARK.joinpath("{sample}_correct_benchmark.txt")   # writing to directory "rsrc
     resources:
-        mem_mb = lambda wc, attempt: (128 * 1024) + (128 * 1024) * (attempt - 1),
+        mem_mb = lambda wc, attempt: (128 * 1024) + (64 * 1024) * (attempt - 1),
         ### mem_mb = (64 * 1024),    # swap with active time_hrs for small tests
-        time_hrs = 71,
+        time_hrs = 70,
         ### time_hrs = 1,   # swap with active time_hrs for small tests
         gpus = lambda wc, attempt: (4) + (2) * (attempt - 1)
         ### gpus = 1         # swap with active gpu for small tests
