@@ -1,7 +1,7 @@
 # global configuration for the workflow "workflow-smk-ont-basecalling-correction"
 
 # path to the samplesheet (must be TSV with columns: sample_name, file_path)
-samplesheet: "/pfssmain/home/meyseb01/projects/ont-basecalling-correction/samples/samples_complete_mhpc_bc01.tsv"
+samplesheet: "/pfssmain/home/meyseb01/projects/ont-basecalling-correction/samples/samples_complete_mhpc_bc01_sub.tsv"
 
 # dorado kit (needs to be modified to fit the users parameters)
 dorado_kit: "SQK-NBD114-24"
