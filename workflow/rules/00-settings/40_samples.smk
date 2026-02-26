@@ -10,7 +10,7 @@ if not SAMPLESHEET.exists():
 
 # load samplesheet into dataframe
 try:
-    samples_in = pd.read_csv(SAMPLESHEET, sep="\t")
+    samples_in = pd.read_csv(SAMPLESHEET, sep="\t", dtype={"sample_name": str})
 except pd.errors.EmptyDataError:
     raise ValueError(
         f"\n\nSamplesheet is empty:\”{SAMPLESHEET}\n\n"
@@ -37,7 +37,7 @@ if samples_in.empty or len(samples_in.index) == 0:
 # build dictionary: sample, path and type
 samples_dict = {}
 for _, row in samples_in.iterrows():
-    sample = row["sample_name"]
+    sample = str(row["sample_name"])
     path = pl.Path(row["file_path"])
 
     if not path.exists():               # check for input paths
