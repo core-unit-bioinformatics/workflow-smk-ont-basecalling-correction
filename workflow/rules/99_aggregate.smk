@@ -20,7 +20,7 @@ WORKFLOW_OUTPUT.extend(rules.run_all_convert_to_pod5.input.pod5)
 # output from module "basecall.smk"
 WORKFLOW_OUTPUT.extend(rules.run_all_basecall.input.fastq)
 # output from module "correct.smk"
-WORKFLOW_OUTPUT.extend(rules.run_all_correct_reads.input.fasta)
+# WORKFLOW_OUTPUT.extend(rules.run_all_correct_reads.input.fasta)	# removed since this should be deleted if the zipped file exists
 WORKFLOW_OUTPUT.extend(rules.run_all_correct_reads.input.gz)
 
 

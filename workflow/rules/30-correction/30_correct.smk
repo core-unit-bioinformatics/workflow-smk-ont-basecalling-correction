@@ -4,7 +4,7 @@ rule correct_reads:
         fastq = DIR_RES.joinpath("basecalled_fastq/{sample}_basecalled.fastq"),
         dorado_bin = lambda wc: CORRECT_DORADO_BIN[wc.sample]
     output:
-        fasta = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta"),
+        fasta = temp(DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta")),
         gz = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta.gz")
 #    conda:
 #        DIR_ENVS.joinpath("gzip.yaml")
