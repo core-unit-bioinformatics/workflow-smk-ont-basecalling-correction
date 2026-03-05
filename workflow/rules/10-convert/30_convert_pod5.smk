@@ -11,7 +11,7 @@ rule convert_to_pod5:
     benchmark:
         DIR_BENCHMARK.joinpath("{sample}_convert_benchmark.txt")   # writing to directory "rsrc
     resources:
-        mem_mb = lambda wc, attempt: (4 * 1024) + (4 * 1024) * (attempt-1),
+        mem_mb = lambda wc, attempt: (6 * 1024) + (4 * 1024) * (attempt-1),
         time_hrs = lambda wc, attempt: (23) + (12) * (attempt-1)
     threads:
         CPU_LOW
