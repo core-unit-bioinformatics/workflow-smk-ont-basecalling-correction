@@ -1,0 +1,14 @@
+# global configuration for the workflow "workflow-smk-ont-basecalling-correction"
+
+# path to the samplesheet (must be TSV with columns: sample_name, file_path)
+samplesheet: "/pfssmain/home/meyseb01/projects/ont-basecalling-correction/samples/samples_complete_mhpc_MRGN_01.tsv"
+
+# dorado kit (needs to be modified to fit the users parameters)
+dorado_kit: "SQK-NBD114-24"
+
+# paths to the Dorado URLs and the needed models (needs to be modified if the user desires other versions/models)
+dorado_fast5_url: "https://cdn.oxfordnanoportal.com/software/analysis/dorado-0.7.2-linux-x64.tar.gz"
+dorado_pod5_url: "https://cdn.oxfordnanoportal.com/software/analysis/dorado-0.9.2-linux-x64.tar.gz"
+dorado_model_fast5: "dna_r10.4.1_e8.2_400bps_sup@v4.1.0"
+dorado_model_pod5: "dna_r10.4.1_e8.2_400bps_sup@v5.0.0"
+dorado_model_correction: "herro-v1"
