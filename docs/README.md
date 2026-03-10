@@ -28,7 +28,7 @@ snakemake -p -d ../wd/ --configfiles config/config.yaml --use-conda --resources 
 ```
 3. option b: if NO internet connection is available:
     - The Dorado binaries and models mentioned in the config file (workflow-smk-ont-basecalling-correction/config/config.yaml) need to be downloaded somewhere else and moved to the following directories (which were created my the init.py script mentioned in [this tutorial](concepts/running.md)). The paths should then be `project_dir/wd/dorado/binaries/dorado-VERSION/` (for both binaries) and `project_dir/wd/dorado/models/MODEL-NAME/` (for all three models). Please put the correct name of the binary/model directories into the config file at the mentioned position.
-    - The container directory (found in the main workflow folder) needs to be moved into `project_dir/wd/.`. Additionally, the usage of conda needs to be swapped with the usage of the just muved container in the corresponding modules.
+    - The container can be downloaded from Sciebo (https://uni-duesseldorf.sciebo.de/s/doddNZrAmcNyq3j) and needs to be moved into `project_dir/wd/container/workflow_full.sif.`. Additionally, the usage of conda needs to be swapped with the usage of the just moved container in the corresponding modules.
         - workflow-smk-ont-basecalling-correction/workflow/rules/10-convert/30_convert_pod5.smk: comment out line 7 and 8, comment in line 9 and 10
         - workflow-smk-ont-basecalling-correction/workflow/rules/30-correction/30_correct.smk: comment out line 9 and 10, comment in line 11 and 12
 
