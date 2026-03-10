@@ -16,7 +16,7 @@ WORKFLOW_OUTPUT.extend(rules.run_all_dorado_setup.input.model_pod5)
 WORKFLOW_OUTPUT.extend(rules.run_all_dorado_setup.input.model_herro)
 
 # output from module "convert_pod5.smk"
-WORKFLOW_OUTPUT.extend(rules.run_all_convert_to_pod5.input.pod5)
+#WORKFLOW_OUTPUT.extend(rules.run_all_convert_to_pod5.input.pod5)	# removed since this should be deleted if the basecalled file exists
 # output from module "basecall.smk"
 WORKFLOW_OUTPUT.extend(rules.run_all_basecall.input.fastq)
 # output from module "correct.smk"

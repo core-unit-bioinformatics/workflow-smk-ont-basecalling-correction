@@ -3,7 +3,7 @@ rule convert_to_pod5:
     input:
         fast5 = lambda wc: samples_dict[wc.sample]["path"]
     output:
-        pod5 = DIR_RES.joinpath("converted_pod5/{sample}.pod5")
+        pod5 = temp(DIR_RES.joinpath("converted_pod5/{sample}.pod5"))
 #    conda:
 #        DIR_ENVS.joinpath("pod5.yaml")
     container:
