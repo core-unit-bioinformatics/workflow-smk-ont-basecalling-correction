@@ -6,10 +6,10 @@ rule correct_reads:
     output:
         fasta = temp(DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta")),
         gz = DIR_RES.joinpath("corrected_fasta/{sample}_corrected.fasta.gz")
-#    conda:
-#        DIR_ENVS.joinpath("gzip.yaml")
-    container:
-        str(DIR_WORKING.joinpath("container/workflow_full.sif"))
+    conda:
+        DIR_ENVS.joinpath("gzip.yaml")
+#    container:
+#        str(DIR_WORKING.joinpath("container/workflow_full.sif"))
     params:
         dorado_model = MODEL_PATH_CORRECTION 
     benchmark:
